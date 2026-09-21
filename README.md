@@ -1,13 +1,11 @@
 # Patrick Mills — Personal Website
 
-This is a personal portfolio website showcasing university projects and my Wellington AI Hackathon 2026 win. It was developed using HTML, CSS and JavaScript with Claude Code. It is publicly accessible via: https://patrickmills.dev/
+This is a personal portfolio website showcasing university projects and my team's Wellington AI Hackathon 2026 win. It was developed using HTML, CSS and JavaScript with Claude Code. It is publicly accessible via: https://patrickmills.dev/
 
 - **Four pages:** Home, Anaesthesia OCR Project, Agile Kanban Pizza Game,
   AI Hackathon 2026.
 - **Responsive:** one layout that adapts from a 320px phone up to a large
   desktop monitor, with a burger menu on small screens.
-  from a CDN, so there is no third-party code to keep patched and no
-  external service that can track visitors or break the site.
 - **Security-hardened** and covered by an automated test suite (see
   [Testing](#testing) and [Security](#security)).
 
