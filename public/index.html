@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<!--
+  ===========================================================================
+  index.html - HOME PAGE
+  ===========================================================================
+  Page structure:
+    1. <head>       - metadata, favicon, stylesheet
+    2. Skip link    - accessibility shortcut past the navigation
+    3. Navigation   - shared across all four pages
+    4. Hero         - "Patrick Mills" heading, banner image, intro paragraph
+    5. University Projects - two rounded cards side by side, each a link
+    6. Awards       - the Wellington AI Hackathon 2026 panel, also a link
+    7. Footer       - LinkedIn and GitHub links (shared across all pages)
+
+  If you edit the navigation or the footer, remember to make the same change
+  in the other three HTML files - this is a plain static site, so there is no
+  template engine sharing them.
+  ===========================================================================
+-->
+<html lang="en-NZ">
+<head>
+  <!-- Character encoding must be the first thing in <head>. Declaring it up
+       front also removes a class of encoding-confusion injection tricks. -->
+  <meta charset="utf-8">
+
+  <!-- Tells mobile browsers to use the real device width rather than
+       pretending to be a 980px desktop. This one line is what makes the
+       responsive CSS breakpoints actually take effect on a phone. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Patrick Mills | Software Portfolio</title>
+  <meta name="description" content="Portfolio of Patrick Mills: university software projects and awards, including the Anaesthesia OCR Project and the Wellington AI Hackathon 2026.">
+
+  <!-- Sent to other sites when a visitor clicks an outbound link. This value
+       shares only the origin (not the full path) with other websites. -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- Keyboard users can press Tab then Enter to jump straight to content. -->
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <!-- ==================================================================
+         NAVIGATION BAR (identical on every page)
+         data-nav / data-nav-toggle / data-nav-menu are the hooks that
+         js/main.js uses to run the mobile burger menu.
+         ================================================================== -->
+    <nav class="site-nav" data-nav aria-label="Main navigation">
+      <div class="container site-nav__inner">
+
+        <a class="site-nav__brand" href="/">
+          <span class="site-nav__mark" aria-hidden="true">PM</span>
+          Patrick Mills
+        </a>
+
+        <!-- Burger button: only visible below the 720px breakpoint.
+             aria-expanded and aria-controls are kept accurate by main.js. -->
+        <button class="nav-toggle" type="button"
+                data-nav-toggle
+                aria-expanded="false"
+                aria-controls="nav-menu">
+          <span class="nav-toggle__bars" aria-hidden="true"></span>
+          <span class="visually-hidden">Toggle navigation menu</span>
+        </button>
+
+        <ul class="site-nav__list" id="nav-menu" data-nav-menu>
+          <!-- aria-current="page" marks (and highlights) the current page. -->
+          <li><a class="site-nav__link" href="/" aria-current="page">Home</a></li>
+          <li><a class="site-nav__link" href="/anaesthesia-ocr">Anaesthesia OCR</a></li>
+          <li><a class="site-nav__link" href="/kanban-pizza-game">Kanban Pizza Game</a></li>
+          <li><a class="site-nav__link" href="/ai-hackathon-2026">AI Hackathon 2026</a></li>
+        </ul>
+
+      </div>
+    </nav>
+
+    <!-- ==================================================================
+         MAIN CONTENT
+         ================================================================== -->
+    <main class="site-main" id="main">
+
+      <!-- ---------------- HERO: name, banner image, intro ---------------- -->
+      <section class="hero">
+        <div class="container hero__inner">
+
+          <!-- <p class="eyebrow">Software Engineering Portfolio</p> -->
+
+          <!-- The single <h1> of the page. -->
+          <h1 class="hero__title">Patrick Mills</h1>
+
+          <!-- BANNER IMAGE
+               Sits in the same rounded frame as the images on the project
+               pages. The sizing rules are in section 6 of css/styles.css:
+               the photo grows as wide as the page allows, but stops at
+               --hero-banner-max-h so it never pushes the text below it off
+               the screen. Its aspect ratio is preserved either way.
+
+               TO SWAP THE PHOTO: change the src, and set width/height to
+               the real pixel size of the new file (see the note below).
+               Always keep a meaningful alt attribute for screen readers. -->
+          <figure class="hero-banner">
+            <div class="hero-banner__inner">
+              <!-- width and height must match the file's true pixel size.
+                   They are not a display size - CSS controls that - they
+                   tell the browser the aspect ratio so it can reserve the
+                   right space before the image downloads, which stops the
+                   page jumping about as it loads. This file really is
+                   2296x3561. -->
+              <img class="hero-banner__img"
+                   src="/images/portrait-image.jpg"
+                   alt="Portrait of Patrick Mills"
+                   width="2296" height="3561"
+                   fetchpriority="high" decoding="async">
+            </div>
+          </figure>
+
+          <!-- PLACEHOLDER TEXT - replace with your own introduction. -->
+          <p class="hero__text">
+            I completed a four-year Bachelor of Engineering with First Class Honours majoring in cybersecurity at Victoria University of Wellington. I have applied software development skills in several projects at university such as a project to capture medical data that included making a user-friendly interface and mobile app. I worked as a Graduate IT Security Adviser at the Ministry for Primary Industries from April to June 2026. I tutored two courses at Victoria University: one in C/C++ and another in cloud computing and networking which mainly involved Amazon Web Services (AWS). I know HTML, CSS, JavaScript, Java, Python, C and C++. I have used numerous AI tools including Claude Code.
+          </p>
+
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- ---------------- UNIVERSITY PROJECTS ---------------- -->
+      <section class="section" aria-labelledby="projects-heading">
+        <div class="container">
+
+          <h2 class="section-title" id="projects-heading">University Projects</h2>
+
+          <!-- Two rounded cards side by side (they stack on phones).
+               Each whole card is an <a>, so the entire square is clickable. -->
+          <div class="project-grid">
+
+            <!-- Card 1 -->
+            <a class="card" href="/anaesthesia-ocr">
+              <div class="card__media">
+                <!--Original dimensions 1600x1000-->
+                <img class="card__img"
+                     src="/images/project-anaesthesia-ocr.png"
+                     alt="Image for the Anaesthesia OCR Project"
+                     width="665" height="508"
+                     loading="lazy" decoding="async">
+              </div>
+              <div class="card__body">
+                <p class="card__meta">University Project</p>
+                <h3 class="card__title">Anaesthesia OCR Project</h3>
+                <p class="card__cue">View project <span aria-hidden="true">&rarr;</span></p>
+              </div>
+            </a>
+
+            <!-- Card 2 -->
+            <a class="card" href="/kanban-pizza-game">
+              <div class="card__media">
+                <img class="card__img"
+                     src="/images/kanban-pizza-detail.png"
+                     alt="Image for the Agile Kanban Pizza Game project"
+                     width="1705" height="899"
+                     loading="lazy" decoding="async">
+              </div>
+              <div class="card__body">
+                <p class="card__meta">University Group Project</p>
+                <h3 class="card__title">Agile Kanban Pizza Game</h3>
+                <p class="card__cue">View project <span aria-hidden="true">&rarr;</span></p>
+              </div>
+            </a>
+
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- ---------------- AWARDS ---------------- -->
+      <section class="section" aria-labelledby="awards-heading">
+        <div class="container">
+
+          <h2 class="section-title" id="awards-heading">Awards</h2>
+
+          <!-- The whole award panel links through to the hackathon page. -->
+          <a class="award" href="/ai-hackathon-2026">
+            <div class="award__media">
+              <img class="award__img"
+                   src="/images/award-hackathon.png"
+                   alt="Image for the Wellington AI Hackathon 2026."
+                   width="230" height="227"
+                   loading="lazy" decoding="async">
+            </div>
+            <div class="award__body">
+              <p class="badge">Award</p>
+              <h3 class="award__title">Winner &ndash; Wellington AI Hackathon 2026</h3>
+              <p class="card__cue">Developed and presented a prototype website to reuse waste in New Zealand’s primary industries using Claude Code, as part of a three-person team over two days.</p>
+              <p class="card__cue">Read about the project <span aria-hidden="true">&rarr;</span></p>
+            </div>
+          </a>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ==================================================================
+         FOOTER (identical on every page)
+
+         SET YOUR OWN LINKS: replace the two href values marked below with
+         your real LinkedIn and GitHub URLs, in all four HTML files.
+
+         Why rel="noopener noreferrer" matters on target="_blank" links:
+           - noopener stops the page you open from getting a JavaScript
+             handle back to this one (the "tabnabbing" attack, where the
+             opened page silently redirects your tab to a fake login page).
+           - noreferrer additionally withholds the referring URL.
+         The SVG icons are inlined rather than loaded from an icon CDN, so
+         the site makes no third-party requests at all.
+         ================================================================== -->
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+
+        <ul class="social-links">
+          <li>
+            <a class="social-link"
+               href="https://www.linkedin.com/in/patrick-mills-6a3aa5289/"
+               target="_blank" rel="noopener noreferrer">
+              <svg class="social-link__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/>
+              </svg>
+              LinkedIn Profile
+            </a>
+          </li>
+          <li>
+            <a class="social-link"
+               href="https://github.com/patrick920"
+               target="_blank" rel="noopener noreferrer">
+              <svg class="social-link__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                <path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.5 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.27 5.69.41.36.78 1.06.78 2.15v3.19c0 .31.21.67.8.55A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/>
+              </svg>
+              GitHub Profile
+            </a>
+          </li>
+        </ul>
+
+        <!-- main.js writes the current year into the <span data-year>. -->
+        <!-- <p class="site-footer__note">
+          &copy; <span data-year>2026</span> Patrick Mills
+        </p> -->
+
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- The script is loaded with `defer` so it does not block rendering and
+       runs only once the HTML has been parsed. -->
+  <script src="/js/main.js" defer></script>
+</body>
+</html>

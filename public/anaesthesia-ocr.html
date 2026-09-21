@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<!--
+  ===========================================================================
+  anaesthesia-ocr.html - ANAESTHESIA OCR PROJECT PAGE
+  ===========================================================================
+  Layout: heading -> paragraph -> video (with a cover image) -> paragraph.
+
+  The video shows a still "poster" image before the visitor presses play,
+  rather than a black rectangle. See the comments on the <video> element.
+  ===========================================================================
+-->
+<html lang="en-NZ">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Anaesthesia OCR Project | Patrick Mills</title>
+  <meta name="description" content="The Anaesthesia OCR Project: a university software project by Patrick Mills, with a demonstration video.">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+  <div class="page">
+
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <!-- ============ NAVIGATION (same markup on every page) ============ -->
+    <nav class="site-nav" data-nav aria-label="Main navigation">
+      <div class="container site-nav__inner">
+
+        <a class="site-nav__brand" href="/">
+          <span class="site-nav__mark" aria-hidden="true">PM</span>
+          Patrick Mills
+        </a>
+
+        <button class="nav-toggle" type="button"
+                data-nav-toggle
+                aria-expanded="false"
+                aria-controls="nav-menu">
+          <span class="nav-toggle__bars" aria-hidden="true"></span>
+          <span class="visually-hidden">Toggle navigation menu</span>
+        </button>
+
+        <ul class="site-nav__list" id="nav-menu" data-nav-menu>
+          <li><a class="site-nav__link" href="/">Home</a></li>
+          <li><a class="site-nav__link" href="/anaesthesia-ocr" aria-current="page">Anaesthesia OCR</a></li>
+          <li><a class="site-nav__link" href="/kanban-pizza-game">Kanban Pizza Game</a></li>
+          <li><a class="site-nav__link" href="/ai-hackathon-2026">AI Hackathon 2026</a></li>
+        </ul>
+
+      </div>
+    </nav>
+
+    <main class="site-main" id="main">
+
+      <!-- ---------------- PAGE HEADER ---------------- -->
+      <header class="page-header">
+        <div class="container">
+          <a class="back-link" href="/"><span aria-hidden="true">&larr;</span> Back to home</a>
+          <h1 class="page-header__title">Anaesthesia OCR Project</h1>
+          <p class="page-header__meta">University Project</p>
+        </div>
+      </header>
+
+      <section class="section section--tight">
+        <div class="container">
+
+          <!-- Technology chips. Edit or delete this list as you like. -->
+          <ul class="tag-list">
+            <li class="tag">Python</li>
+            <li class="tag">Kivy</li>
+            <li class="tag">Android</li>
+
+          </ul>
+
+          <!-- ---------------- FIRST PARAGRAPH ---------------- -->
+          <div class="prose">
+            <p>
+              I worked on a year-long project where a camera takes pictures of an anaesthesia monitor every few seconds (an anaesthesia monitor displays medical data of a patient such as blood pressure and heart rate.) From those images, Optical Character Recognition (OCR) extracted the patient data displayed on the monitor to medical software for analysis. I developed a desktop user interface using Python with existing OCR components. I also developed a mobile app using Kivy (a Python framework), which communicated with the desktop program over WebSockets. I was one of eight students selected to present at the showcase presentations at university. Below is a video showing the system in action:
+            </p>
+          </div>
+
+          <!-- ---------------- VIDEO ----------------
+               How the "still image instead of a black screen" works:
+
+               poster="..."   The image shown before playback starts. Without
+                              it the browser would show a black rectangle
+                              (or the first frame) until the visitor presses play.
+               controls       Shows the browser's play / pause / volume UI.
+               preload="metadata"
+                              Fetches only the video's length and dimensions on
+                              page load, not the whole file. Keeps the page fast
+                              and saves mobile data.
+               playsinline    Stops iOS Safari hijacking the screen into
+                              fullscreen the moment playback starts.
+               width/height   Declared so the browser reserves the right space
+                              before anything loads (no layout "jump").
+
+               TO ADD YOUR MP4:
+                 1. Put the file in  public/video/  (e.g. ocr-demo.mp4).
+                 2. Delete the two comment markers around the <source> line
+                    below and set src to "/video/ocr-demo.mp4".
+                 3. Optionally replace poster="..." with a still frame from
+                    your video (a 16:9 JPG or PNG in public/images/).
+          -->
+          <figure class="media-frame">
+            <div class="media-frame__inner">
+              <!-- data-hls points at the HLS playlist. js/main.js uses it to
+                   enable seeking (see the comments there). The <source> .mp4
+                   below stays as the fallback for browsers without
+                   JavaScript, so the video always plays either way. -->
+              <video class="video"
+                     controls
+                     preload="metadata"
+                     playsinline
+                     width="1920" height="1080"
+                     data-hls="/video/ocr/index.m3u8"
+                     poster="/images/video-poster-ocr.png">
+                <source src="/video/ocr-demo.mp4" type="video/mp4">
+
+                <!-- Shown only by browsers that cannot play HTML5 video. -->
+                <p>
+                  Your browser cannot play embedded video. The demonstration
+                  video for the Anaesthesia OCR Project will be available here.
+                </p>
+              </video>
+            </div>
+            <figcaption class="media-caption">
+              Video demonstration of the Anaesthesia OCR
+              Project.
+            </figcaption>
+          </figure>
+
+          <!-- ---------------- SECOND PARAGRAPH ---------------- -->
+          <div class="prose">
+            <p>
+              Throughout the project, I sought feedback from my supervisors, helping to ensure that my system is aligned with end user requirements. I used AI tools to accelerate the development of the project. I built an installer using Pyinstaller and Nullsoft Scriptable Install System. This allowed both my program and the medical software to be installed on any Windows PC easily without any time consuming and error-prone manual setup steps. I wrote documentation files on how to set up and use the system.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ============ FOOTER (same markup on every page) ============
+         Remember to update these two URLs in all four HTML files. -->
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+
+        <ul class="social-links">
+          <li>
+            <a class="social-link"
+               href="https://www.linkedin.com/in/patrick-mills-6a3aa5289/"
+               target="_blank" rel="noopener noreferrer">
+              <svg class="social-link__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/>
+              </svg>
+              LinkedIn Profile
+            </a>
+          </li>
+          <li>
+            <a class="social-link"
+               href="https://github.com/patrick920"
+               target="_blank" rel="noopener noreferrer">
+              <svg class="social-link__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                <path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.5 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.27 5.69.41.36.78 1.06.78 2.15v3.19c0 .31.21.67.8.55A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/>
+              </svg>
+              GitHub Profile
+            </a>
+          </li>
+        </ul>
+
+        <!-- <p class="site-footer__note">
+          &copy; <span data-year>2026</span> Patrick Mills
+        </p> -->
+
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- hls.js is loaded only on the two pages that have a video, so the rest
+       of the site does not pay for it. It is self-hosted (js/vendor/), not
+       pulled from a CDN, so the site still makes zero third-party requests
+       and the Content-Security-Policy can stay script-src 'self'.
+       Loaded BEFORE main.js because main.js looks for window.Hls. -->
+  <script src="/js/vendor/hls.light.min.js" defer></script>
+  <script src="/js/main.js" defer></script>
+</body>
+</html>

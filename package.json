@@ -1,0 +1,20 @@
+{
+  "name": "patrick-mills-personal-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Personal portfolio website for Patrick Mills. Static HTML, CSS and JavaScript served by a hardened, dependency-free Node.js server.",
+  "author": "Patrick Mills",
+  "license": "UNLICENSED",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node tests/security-tests.js",
+    "test:links": "node tests/check-links.js",
+    "check": "node tests/check-links.js && node tests/security-tests.js"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

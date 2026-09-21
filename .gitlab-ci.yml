@@ -1,0 +1,37 @@
+# You can override the included template(s) by including variable overrides
+# SAST customization: https://docs.gitlab.com/user/application_security/sast/#available-cicd-variables
+# Secret Detection customization: https://docs.gitlab.com/user/application_security/secret_detection/pipeline/configure/
+# Dependency Scanning customization: https://docs.gitlab.com/user/application_security/dependency_scanning/dependency_scanning_sbom/#customizing-analyzer-behavior
+# Container Scanning customization: https://docs.gitlab.com/user/application_security/container_scanning/#customizing-analyzer-behavior
+# Note that environment variables can be set in several places
+# See https://docs.gitlab.com/ci/variables/#cicd-variable-precedence
+stages:
+- test
+- secret-detection
+sast:
+  stage: test
+include:
+- template: Security/SAST.gitlab-ci.yml
+- template: Security/Secret-Detection.gitlab-ci.yml
+variables:
+  SECRET_DETECTION_ENABLED: 'true'
+secret_detection:
+  stage: secret-detection
+
+# ===========================================================================
+#  NOTE ON DEPLOYMENT
+#
+#  There is deliberately no "pages" job here. The site is hosted on
+#  Cloudflare, which builds and deploys straight from this repository.
+#
+#  A GitLab Pages job was tried first and removed for two reasons:
+#    1. GitLab Pages ignored public/_headers, so the site was served with
+#       none of its security headers.
+#    2. It does not support HTTP range requests, so the videos could not be
+#       scrubbed.
+#
+#  Leaving the job in place would also keep a second, public copy of the
+#  site live on gitlab.io serving no security headers at all.
+#
+#  This pipeline now only runs the security scans above.
+# ===========================================================================

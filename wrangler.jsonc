@@ -1,0 +1,38 @@
+// ==========================================================================
+//  wrangler.jsonc - Cloudflare deployment config
+// ==========================================================================
+//
+//  ONLY NEEDED IF you deploy through Cloudflare's newer Workers-style flow,
+//  where the deploy command is "npx wrangler deploy". That command needs a
+//  config file like this one to know what to publish - without it the build
+//  fails.
+//
+//  If you used the classic "Pages -> Connect to Git" flow instead (build
+//  command empty, output directory "public"), this file is not used and can
+//  be deleted.
+//
+//  There is no "main" entry because there is no server-side code: this is a
+//  purely static site. Cloudflare serves the files in public/ directly.
+//
+//  public/_headers still applies - Cloudflare reads it from the assets
+//  directory root and it is not served to visitors. Verify that after the
+//  first deploy with the curl check (see README).
+// ==========================================================================
+{
+  // MUST match the Worker this project actually deploys to - currently
+  // "patrickmills" (as seen in patrickmills.<account>.workers.dev). If this
+  // disagrees, running "wrangler deploy" by hand would publish to a second,
+  // separate Worker, and the custom domain would still be attached to the
+  // original one.
+  "name": "patrickmills",
+
+  // Pins the Workers runtime behaviour to how it worked on this date, so a
+  // future platform change cannot silently alter the deployment.
+  "compatibility_date": "2026-09-12",
+
+  "assets": {
+    // The site root - the same folder server.js serves locally, so what you
+    // see in development is what gets published.
+    "directory": "./public"
+  }
+}

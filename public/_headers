@@ -1,0 +1,54 @@
+# ===========================================================================
+#  _headers - security headers for the PUBLISHED site
+# ===========================================================================
+#
+#  WHY THIS FILE EXISTS
+#  --------------------
+#  Locally, server.js sends the site's security headers. When the site is
+#  published to a static host, server.js is NOT deployed - the host serves
+#  the files in public/ directly - so those headers would silently vanish.
+#  The site would look identical while losing its Content-Security-Policy,
+#  its clickjacking protection and its referrer policy.
+#
+#  This file re-declares them for the host. It is read by GitLab Pages,
+#  Netlify and Cloudflare Pages, all of which use the same format. The host
+#  consumes the file and does not serve it to visitors.
+#
+#  KEEP IT IN STEP WITH server.js
+#  ------------------------------
+#  The securityHeaders() function in server.js is the source of truth and
+#  explains what each header does. The values below are copied from it
+#  verbatim. `npm run test:links` fails if a header exists in server.js but
+#  is missing here, so the two cannot silently drift apart.
+#
+#  FORMAT: a path pattern on its own line, then indented "Name: value"
+#  lines. /* matches every path on the site.
+# ===========================================================================
+
+/*
+  # media-src includes blob: because hls.js feeds video to the player through
+  # Media Source Extensions, which uses a locally-created blob: URL. It does
+  # not allow media from any external origin.
+  Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; media-src 'self' blob:; font-src 'self'; connect-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: accelerometer=(), autoplay=(), camera=(), display-capture=(), encrypted-media=(), fullscreen=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(self), usb=(), xr-spatial-tracking=()
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+  X-Permitted-Cross-Domain-Policies: none
+  X-DNS-Prefetch-Control: off
+
+  # HTTP Strict Transport Security: tells browsers to only ever reach this
+  # site over HTTPS. server.js deliberately never sends this locally, because
+  # it would pin http://127.0.0.1 to HTTPS and break other local projects.
+  #
+  # Now set to a full year, having confirmed HTTPS works on both
+  # patrickmills.dev and www.patrickmills.dev with a valid certificate.
+  #
+  # CAUTION if you ever change this: max-age is in seconds and browsers
+  # REMEMBER it. A visitor who loads the site once will refuse to reach it
+  # over plain HTTP for a year afterwards. Lowering the number here does not
+  # un-remember it for people who have already visited. Only raise it again
+  # after HTTPS is known good - which it is.
+  Strict-Transport-Security: max-age=31536000; includeSubDomains

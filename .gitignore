@@ -1,0 +1,36 @@
+# ---------------------------------------------------------------------------
+# Files that should never be committed to the repository.
+#
+# This matters for security as well as tidiness: anything committed to git
+# is very hard to remove afterwards, and a repository that is later made
+# public exposes its entire history.
+# ---------------------------------------------------------------------------
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Secrets and local configuration - never commit these
+.env
+.env.*
+*.pem
+*.key
+*.pfx
+
+# Editor and OS clutter
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Leftovers from a test run (the suite cleans these up itself, but just in case)
+test-fixture-*
+public/test-fixture-*
+public/.test-secret-config
+
+# Build or backup artefacts
+*.bak
+*.tmp
+*.log
