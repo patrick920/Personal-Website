@@ -70,7 +70,7 @@ personalwebsite1/
 │   ├── css/styles.css          All styling (one file, sectioned + commented)
 │   ├── js/main.js              Burger menu and footer year
 │   ├── images/                 Images and video cover images
-│   └── video/                  Put your MP4 files here (see its README.txt)
+│   └── video/                  Videos
 └── tests/
     ├── security-tests.js   Attacks the running server (139 checks)
     └── check-links.js      Static analysis of the HTML, CSS and JS
